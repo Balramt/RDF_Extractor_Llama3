@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:foaf="http://xmlns.com/foaf/0.1/">
+
+  <!-- Define a person -->
+  <rdf:Description rdf:about="http://example.org/person/1">
+    <foaf:name>Alice</foaf:name>
+    <foaf:age>30</foaf:age>
+    <foaf:mbox rdf:resource="mailto:alice@example.com"/>
+  </rdf:Description>
+
+  <!-- Define another person -->
+  <rdf:Description rdf:about="http://example.org/person/2">
+    <foaf:name>Bob</foaf:name>
+    <foaf:age>25</foaf:age>
+    <foaf:mbox rdf:resource="mailto:bob@example.com"/>
+  </rdf:Description>
+
+</rdf:RDF>
