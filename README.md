@@ -1,11 +1,6 @@
 # RDF_Extractor_Llama3
-Sure, I'll include instructions for installing Ollama and the necessary model.
 
----
-
-# RDF_Extractor_Llama3
-
-`RDF_Extractor_Llama3` is a Python-based tool that uses a language model to extract and summarize RDF (Resource Description Framework) data. This tool leverages the `langchain` library and the `Ollama` model to parse RDF files and format the extracted triplets.
+`RDF_Extractor_Llama3`is a Python-based tool that uses a language model to extract and summarize RDF (Resource Description Framework) data. This tool leverages the `langchain` library and the `Ollama` model to parse RDF files and format the extracted triplets.
 
 ## Overview
 
@@ -152,7 +147,3 @@ Contributions are welcome! Please fork the repository and create a pull request 
 ## Acknowledgements
 
 This project uses the [LangChain](https://github.com/langchain-ai/langchain) library and the [Ollama](https://ollama.ai/) language model.
-
----
-
-This README now includes instructions for installing Ollama and the necessary model, ensuring users can set up the project from scratch. Feel free to modify it further based on additional details or requirements specific to your project.
