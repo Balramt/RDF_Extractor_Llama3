@@ -89,6 +89,26 @@ pip install langchain
    Ensure to handle dates and numbers appropriately as literals or values in the RDF output.
    """
 
+
+### Model Output Sample
+**Triplet 1**
+- Extracted_RDF_Set: (Barack Hussein Obama II, was born in, Honolulu)
+- Subject: http://example.org/person/BarackObama
+- Predicate: http://xmlns.com/foaf/0.1/birthPlace
+- Object: http://example.org/location/Honolulu
+
+**Triplet 2**
+- Extracted_RDF_Set: (Barack Hussein Obama II, graduated from, Columbia University)
+- Subject: http://example.org/person/BarackObama
+- Predicate: http://xmlns.com/foaf/0.1/alumniOf
+- Object: http://example.org/university/ColumbiaUniversity
+
+**Triplet 3**
+- Extracted_RDF_Set: (Barack Hussein Obama II, graduated in, 1983)
+- Subject: http://example.org/person/BarackObama
+- Predicate: http://example.org/ontology/graduationYear
+- Object: "1983"
+
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
