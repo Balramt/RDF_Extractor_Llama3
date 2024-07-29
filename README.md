@@ -51,7 +51,7 @@ pip install langchain
 ### Step 5: Download and Set Up the Llama3 Model
 
 1. **Download the Llama3 Model**:
-    - Run the following command to download the latest Llama3 model:
+    - Run the following command to download the Llama3 (meta-llama/Meta-Llama-3-8B) model:
       ```bash
       ollama run llama3.1
       ```
