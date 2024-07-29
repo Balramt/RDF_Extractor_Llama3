@@ -1,149 +1,122 @@
-# RDF_Extractor_Llama3
+# RDF Triplet Extraction Using Llama3
 
-`RDF_Extractor_Llama3`is a Python-based tool that uses a language model to extract and summarize RDF (Resource Description Framework) data. This tool leverages the `langchain` library, `Ollama` tool and LLama3 model (meta-llama/Meta-Llama-3-8B) to parse RDF files and format the extracted triplets.
+This project demonstrates how to use the `langchain` library with the Llama3 model to extract RDF triplets from a text file. The script reads RDF data from a specified text file, constructs a prompt to parse and extract RDF-like triplets, and outputs the results in a specified format.
 
-## Overview
+## Prerequisites
 
-This project demonstrates how to configure and use a language model to process RDF data, extract meaningful information, and present it in a structured format. The RDF data in this example uses the FOAF (Friend of a Friend) vocabulary to describe people and their characteristics.
-
-## Features
-
-- Load RDF data from a specified file path.
-- Initialize and configure the Ollama language model.
-- Parse RDF data and extract triplets.
-- Format and print the extracted information.
+- Python 3.x
+- `langchain` library
+- A running instance of the Llama3 model server
 
 ## Installation
 
-To use this project, you'll need to set up a Python environment with the necessary dependencies, and install Ollama and the required model. Follow these steps:
+1. **Install Required Packages**
 
-### Step 1: Clone the Repository
+   Make sure you have the `langchain` library installed. You can install it using pip:
 
-```bash
-git clone https://github.com/Balramt/RDF_Extractor_Llama3.git
-cd RDF_Extractor_Llama3
-```
+   ```bash
+   pip install langchain
+   ```
 
-### Step 2: Create a Virtual Environment
+2. **Set Up Llama3 Model Server**
 
-```bash
-python -m venv venv
-source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
-```
-
-### Step 3: Install Required Python Packages
-
-```bash
-pip install langchain
-```
-
-### Step 4: Install Ollama
-
-1. **Download and Install Ollama**:
-    - Visit the [Ollama website](https://ollama.ai/) and follow the instructions to download and install Ollama for your operating system.
-    
-2. **Verify Installation**:
-    - Ensure Ollama is installed correctly by running the following command:
-      ```bash
-      ollama --version
-      ```
-
-### Step 5: Download and Set Up the Llama3 Model
-
-1. **Download the Llama3 Model**:
-    - Run the following command to download the Llama3 (meta-llama/Meta-Llama-3-8B) model:
-      ```bash
-      ollama run llama3.1
-      ```
-
-2. **Verify Model Download**:
-    - Ensure the model is downloaded correctly by listing the models:
-      ```bash
-      ollama models
-      ```
+   Ensure that your Llama3 model server is running and accessible at `http://localhost:11434`.
 
 ## Usage
 
-1. **Configure the Script**:
-   - Update the `RDF_FILEPATH` variable with the path to your RDF file in the script.
+1. **Update File Path**
 
-2. **Run the Script**:
-   - Open the Jupyter Notebook `RDF_Extractor.ipynb` in your preferred environment (e.g., Jupyter Lab or Jupyter Notebook).
+   Update the `RDF_FILEPATH` variable in the script to point to your text file containing the RDF data.
 
-### Example
-
-Here's an example of how the script works:
-
-1. **Configuration**:
    ```python
-   LOCAL_MODEL = "llama3:latest"
-   RDF_FILEPATH = r"D:\\New folder\\people.rdf"  # Update this with your RDF file path
+   RDF_FILEPATH = r"D:\New folder\RDF_Extractor_Llama3\Barack-Obama.txt"
    ```
 
-2. **Initialize the Language Model**:
-   ```python
-   from langchain.llms import Ollama
-   llm = Ollama(base_url="http://localhost:11434", model=LOCAL_MODEL, verbose=True)
+2. **Run the Script**
+
+   Execute the Python script to generate RDF triplets from the text data.
+
+   ```bash
+   python your_script_name.py
    ```
 
-3. **Extract and Format RDF Data**:
-   ```python
-   # Assume generated_text contains the output from the language model
-   generated_text = """
-   ... (model output here) ...
-   """
-   
-   # Print generated summary
-   print(f"Generated Summary:\n{generated_text}")
-   ```
+## Script Details
 
-### Sample Output
+The script performs the following actions:
 
-The tool processes the RDF data and outputs the extracted triplets in a readable format. For instance:
+1. **Read RDF Data**
+
+   It reads the RDF data from a specified text file.
+
+2. **Construct Prompt**
+
+   It constructs a prompt for the Llama3 model, specifying how to parse and extract RDF-like triplets from the text. The prompt includes:
+
+   - Identification of subject, predicate, and object.
+   - Formatting guidelines for RDF triplets.
+   - Examples for reference.
+
+3. **Generate RDF Triplets**
+
+   It sends the constructed prompt to the Llama3 model and generates RDF triplets.
+
+4. **Print Results**
+
+   It prints the generated RDF triplets.
+
+## Example Prompt
+
+The prompt provided to the model is as follows:
 
 ```
-Generated Summary:
-Here are the triplets parsed from the RDF data, formatted according to your request:
+Here is the RDF data: 
 
+{rdf_data}
+
+Please parse and extract RDF-like triplets from the text. For each identified triplet:
+1.Extracted_RDF_Set: (Subject, Predicate, Object)
+2. Identify the subject, predicate, and object.
+3. Format the output as RDF triplets with appropriate URIs and literals.
+4. Handle various types of information, including names, locations, dates, and numerical values.
+
+Use the following guidelines:
+- Format the output as follows for each triplet:
+  **Triplet N**
+  - Extracted_RDF_Set: (Subject, Predicate, Object)
+  - Subject: [URL or Literal]
+  - Predicate: [URL]
+  - Object: [URL or Literal]
+
+Examples:
+Text: "Obama was born in Honolulu, Hawaii. He graduated from Columbia University in 1983."
+
+Outputs:
 **Triplet 1**
-- Subject: http://example.org/person/1
-- Predicate: http://xmlns.com/foaf/0.1/name
-- Object: Alice
+- Extracted_RDF_Set: (Obama, was born in, Honolulu)
+- Subject: http://example.org/person/BarackObama
+- Predicate: http://xmlns.com/foaf/0.1/birthPlace
+- Object: http://example.org/location/Honolulu
 
 **Triplet 2**
-- Subject: http://example.org/person/1
-- Predicate: http://xmlns.com/foaf/0.1/age
-- Object: 30
+- Extracted_RDF_Set: (Obama, graduated from, Columbia University)
+- Subject: http://example.org/person/BarackObama
+- Predicate: http://xmlns.com/foaf/0.1/alumniOf
+- Object: http://example.org/university/ColumbiaUniversity
 
 **Triplet 3**
-- Subject: http://example.org/person/1
-- Predicate: http://xmlns.com/foaf/0.1/mbox
-- Object: mailto:alice@example.com
+- Extracted_RDF_Set: (Obama, graduated in, 1983)
+- Subject: http://example.org/person/BarackObama
+- Predicate: http://example.org/ontology/graduationYear
+- Object: "1983"
 
-**Triplet 4**
-- Subject: http://example.org/person/2
-- Predicate: http://xmlns.com/foaf/0.1/name
-- Object: Bob
-
-**Triplet 5**
-- Subject: http://example.org/person/2
-- Predicate: http://xmlns.com/foaf/0.1/age
-- Object: 25
-
-**Triplet 6**
-- Subject: http://example.org/person/2
-- Predicate: http://xmlns.com/foaf/0.1/mbox
-- Object: mailto:bob@example.com
+Ensure to handle dates and numbers appropriately as literals or values in the RDF output.
 ```
+
+## Notes
+
+- Ensure the text file contains properly formatted RDF data for accurate extraction.
+- Adjust the `max_length` parameter in the `llm.generate` method if necessary to accommodate larger RDF data.
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-## Contributing
-
-Contributions are welcome! Please fork the repository and create a pull request with your changes.
-
-## Acknowledgements
-
-This project uses the LangChain library and the Ollama LLM tool. Additionally, it incorporates the Llama3 model with the name meta-llama/Meta-Llama-3-8B
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
