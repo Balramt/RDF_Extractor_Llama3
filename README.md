@@ -53,7 +53,7 @@ pip install langchain
 1. **Download the Llama3 Model**:
     - Run the following command to download the latest Llama3 model:
       ```bash
-      ollama pull llama3:latest
+      ollama run llama3.1
       ```
 
 2. **Verify Model Download**:
