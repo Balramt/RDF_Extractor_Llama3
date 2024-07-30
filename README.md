@@ -113,10 +113,6 @@ pip install langchain
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-## Contributing
-
-Contributions are welcome! Please fork the repository and create a pull request with your changes.
-
 ## Acknowledgements
 
 This project uses the LangChain library and the Ollama LLM tool. Additionally, it incorporates the Llama3 model with the name meta-llama/Meta-Llama-3-8B.
